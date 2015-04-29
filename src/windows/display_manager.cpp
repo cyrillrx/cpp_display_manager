@@ -3,7 +3,6 @@
 //
 
 #include "../display_manager.h"
-
 #include <iostream>
 
 const auto ERROR_INDEX(-1);
@@ -99,19 +98,21 @@ int DisplayManager::GetNextMonitorIndex(HMONITOR monitor)
     const auto monitorsCount = GetSystemMetrics(SM_CMONITORS);
     const auto currentIndex = GetMonitorIndex(monitor);
 
-    // Si GetMonitorIndex a renvoyé une erreur
+    // GetMonitorIndex returned an error
     if (currentIndex == ERROR_INDEX) {
         return ERROR_INDEX;
-
-        // Si Le moniteur n'est pas le dernier moniteur de la liste
-    } else if (currentIndex < monitorsCount - 1) {
-        return currentIndex + 1;
     }
 
-    // Le moniteur est le dernier, on boucle sur le premier
-    return FIRST_MON_ID;
+    // The monitor is the last one
+    if (currentIndex >= monitorsCount) {
+        return FIRST_MON_ID;
+    }
+
+    // Regular case
+    return currentIndex + 1;
 }
 
+// TODO comment
 /**
  * @param monitor Le moniteur précédent celui que l'on veut récupérer.
  * @return Le moniteur suivant celui passé en paramètre.
@@ -127,6 +128,7 @@ HMONITOR DisplayManager::GetNextMonitor(HMONITOR monitor)
     return monitors_[nextMonitorIndex];
 }
 
+// TODO comment
 /**
  * @param monitor Le moniteur dont on veut connaitre les dimensions.
  * @return Le rectangle délimitant la position et les dimensions du moniteur.
@@ -144,18 +146,21 @@ rect* DisplayManager::GetMonitorRect(HMONITOR monitor)
     return nullptr;
 }
 
+// TODO comment
 /**
  * @param window La fenêtre dont on veut connaitre la position relative.
  * @param rectMon La position du moniteur.
  * @return La position relative de la fenêtre par rappot au moniteur.
  * Retourne nullptr en cas d'erreur.
  */
-rect* DisplayManager::GetRelativePos(HWND window, rect rectMon)
+rect<int> DisplayManager::GetRelativePos(HWND window, rect<int> rectMon)
 {
+// TODO comment
     // Récuperation de la position de la fenêtre
     RECT windowPos;
     if (GetWindowRect(window, &windowPos) != 0) {
-        auto* relativePos = new rect();
+        rect<int> relativePos;
+// TODO comment
         // Calcul de l'offset en pixels
         relativePos->left = windowPos.left - rectMon.left;
         relativePos->top = windowPos.top - rectMon.top;
@@ -181,6 +186,7 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
         return false;
     }
 
+// TODO comment
     // Récupèration de la position du moniteur source
     auto* srcMonPos = GetMonitorRect(srcMonitor);
     if (srcMonPos) {
@@ -189,6 +195,7 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
         std::cerr << "!!! GetMonitorRect(_srcMonitor) failed !!!" << std::endl;
     }
 
+// TODO comment
     // Récupèration de la position du nouveau moniteur
     auto* destMonPos = GetMonitorRect(destMonitor);
     if (destMonPos) {
@@ -197,6 +204,7 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
         std::cerr << "!!! GetMonitorRect(_destMonitor) failed !!!" << std::endl;
     }
 
+// TODO comment
     // Calcul de la position relative de la fenêtre par rapport au moniteur source
     auto* windowRelPos = GetRelativePos(window, *srcMonPos);
     if (windowRelPos) {
@@ -205,10 +213,12 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
         std::cerr << "!!! GetRelativePos(_window, *rectSrcMon) failed !!!" << std::endl;
     }
 
+// TODO comment
     // Calcul du coefficient d'agrandissement pour passer d'un moniteur à l'autre
     auto coef = GetRectCoef(*srcMonPos, *destMonPos);
     coef.display("coef");
 
+// TODO comment
     // Application du coef à la position relative de la fenêtre
     auto* newRelPos = ApplyCoef(*windowRelPos, coef);
     if (newRelPos) {
@@ -217,6 +227,7 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
         std::cout << "!!! ApplyCoef(*windowRelPos, coef) failed !!!" << std::endl;
     }
 
+// TODO comment
     // Calcul de la position absolue finale de la fenêtre
     auto* newPos = ApplyOffest(*newRelPos, destMonPos->left, destMonPos->top);
     if (newPos) {
@@ -240,8 +251,16 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
 /**
  * Windows CALLBACK to list monitors
  */
-BOOL CALLBACK DisplayManager::MonitorEnumProc(HMONITOR monitor, HDC hdcMonitor, LPRECT lpMonitorRect, LPARAM dwData )
+BOOL CALLBACK
+DisplayManager::MonitorEnumProc(HMONITOR
+monitor,
+HDC hdcMonitor, LPRECT
+lpMonitorRect,
+LPARAM dwData
+)
 {
-monitors_.push_back(monitor);
-return TRUE;
+monitors_.
+push_back(monitor);
+return
+TRUE;
 }

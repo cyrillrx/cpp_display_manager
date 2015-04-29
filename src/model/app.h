@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <string>
+
 /**
  * Represents an application or executable.
  */

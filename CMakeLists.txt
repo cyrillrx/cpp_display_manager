@@ -1,6 +1,10 @@
 
 ADD_BII_TARGETS()
 
+# Enable C++11
+INCLUDE(biicode/cmake/tools) # Include tools.cmake file from cmake block from the "biicode" user
+ACTIVATE_CPP11(INTERFACE ${BII_BLOCK_TARGET})
+
 ###############################################################################
 #      HELP                                                                   #
 ###############################################################################
