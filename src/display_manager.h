@@ -12,7 +12,10 @@
 
 #include <vector>
 #include "rect.h"
+#include "point.h"
 #include "model/window.h"
+
+typedef point <float> pointf;
 
 /**
  * Screens and windows manager class

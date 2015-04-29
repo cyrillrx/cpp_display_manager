@@ -1,0 +1,33 @@
+# MacOS garbage
+.DS_Store
+
+# temp files
+*~*
+
+# Intellij project files
+.idea/
+
+# VS project files
+*.suo
+*.sdf
+*.opensdf
+*.user
+*.filters
+*.log
+*.layout
+.directory
+.objs
+Debug
+Release
+include
+lib
+ipch
+
+# Biicode
+/bii/
+/cmake/
+/build/
+/bin/
+/deps/
+/blocks/
+settings.pyc

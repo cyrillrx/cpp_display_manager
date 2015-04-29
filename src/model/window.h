@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <iosfwd>
+#include <string>
 
 /**
  * Represents a window on the screen.

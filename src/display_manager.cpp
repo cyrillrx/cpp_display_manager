@@ -4,8 +4,6 @@
 
 #include "display_manager.h"
 
-typedef point <float> pointf;
-
 pointf DisplayManager::GetRectCoef(rect rect1, rect rect2)
 {
     pointf coef;
