@@ -72,8 +72,8 @@ private:
 	static int GetNextMonitorIndex(HMONITOR monitor);
 	static HMONITOR GetPrevMonitor(HMONITOR monitor);
 	static HMONITOR GetNextMonitor(HMONITOR monitor);
-	static rect<int>* GetMonitorRect(HMONITOR monitor);
-	static rect<int>* GetRelativePos(HWND window, rect<int> rectMon);
+	static rect<int> GetMonitorRect(HMONITOR monitor);
+	static rect<int> GetRelativePos(HWND window, rect<int> rectMon);
 	static bool MoveWindow(HWND window, HMONITOR monitorSrc, HMONITOR monitorDest);
 # endif
 };
