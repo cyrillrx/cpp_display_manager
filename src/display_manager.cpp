@@ -4,18 +4,18 @@
 
 #include "display_manager.h"
 
-pointf DisplayManager::GetRectCoef(rect<int> rect1, rect<int> rect2)
+Pointf DisplayManager::GetRectCoef(Rect<int> rect1, Rect<int> rect2)
 {
-    pointf coef;
+    Pointf coef;
     coef.x = (float) (rect2.width()) / (float) (rect1.width());
     coef.y = (float) (rect2.height()) / (float) (rect1.height());
 
     return coef;
 }
 
-rect<int> DisplayManager::ApplyCoef(rect<int> rectIn, pointf coef)
+Rect<int> DisplayManager::ApplyCoef(Rect<int> rectIn, Pointf coef)
 {
-    rect<int> rectOut;
+    Rect<int> rectOut;
     rectOut.left = (int) ((float) rectIn.left * coef.x);
     rectOut.top = (int) ((float) rectIn.top * coef.y);
     rectOut.right = (int) ((float) rectIn.right * coef.x);
@@ -24,9 +24,9 @@ rect<int> DisplayManager::ApplyCoef(rect<int> rectIn, pointf coef)
     return rectOut;
 }
 
-rect<int> DisplayManager::ApplyOffest(rect<int> relativePos, const int& offsetX, const int& offsetY)
+Rect<int> DisplayManager::ApplyOffest(Rect<int> relativePos, const int& offsetX, const int& offsetY)
 {
-    rect<int> absPos;
+    Rect<int> absPos;
     absPos.left = relativePos.left + offsetX;
     absPos.top = relativePos.top + offsetY;
     absPos.right = relativePos.right + offsetX;

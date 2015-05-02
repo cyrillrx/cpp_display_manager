@@ -4,13 +4,15 @@
 
 #include "../display_manager.h"
 
-bool SplashRight(Window win)
+#if !defined(WINDOWS_PLATFORM)
+
+bool SplashLeft(Window win)
 {
     // TODO implement
     return false;
 }
 
-bool SplashLeft(Window win)
+bool SplashRight(Window win)
 {
     // TODO implement
     return false;
@@ -33,3 +35,4 @@ int DisplayManager::MonitorCount()
     // TODO implement
     return 0;
 }
+#endif

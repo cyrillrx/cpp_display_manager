@@ -5,11 +5,12 @@
 #include "gtest/gtest.h"
 #include "../src/display_manager.h"
 
-TEST(DisplayManager, CountMonitors )
+TEST(DisplayManager, CountMonitors)
 {
-    ASSERT_TRUE(DisplayManager::MonitorCount() > 0) << "There should be at least one monitor";
+    const auto monCount = DisplayManager::MonitorCount();
+    std::cout << "Monitor count: " << monCount << std::endl;
+    ASSERT_TRUE(monCount > 0) << "There should be at least one monitor";
 }
-
 
 int main(int argc, char** argv)
 {
