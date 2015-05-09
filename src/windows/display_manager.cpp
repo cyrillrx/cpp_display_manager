@@ -12,7 +12,55 @@
 const auto ERROR_INDEX(-1);
 const auto FIRST_MON_ID(0);
 
+void displayWindows(const Window& window)
+{
+    std::cout << "---------------------------------" << std::endl;
+    std::cout << "Window title: " << window.title() << std::endl;
+    Display(window.rect());
+}
+
+std::vector<Window> DisplayManager::windows_ = std::vector<Window>();
+
 std::vector<HMONITOR> DisplayManager::monitors_ = std::vector<HMONITOR>();
+
+bool DisplayManager::GetWindowList()
+{
+    EnumWindows(
+            [](HWND hwnd, LPARAM lparam) -> BOOL {
+                if (!IsWindowVisible(hwnd)) {
+                    return TRUE;
+                }
+                char class_name[256];
+                char title[256];
+                if (GetWindowTextLength(hwnd) < 1) {
+                    return TRUE;
+                }
+                GetWindowText(hwnd, title, sizeof(title));
+//                           GetClassName(hwnd, class_name, sizeof(class_name));
+//                           std::cout << "Class name: " << class_name << std::endl;
+
+                WINDOWINFO windowInfo;
+                GetWindowInfo(hwnd, &windowInfo);
+                auto window = Window(title,
+                                     Rect<int>(windowInfo.rcWindow.left,
+                                               windowInfo.rcWindow.top,
+                                               windowInfo.rcWindow.right,
+                                               windowInfo.rcWindow.bottom));
+                windows_.push_back(window);
+
+                return TRUE;
+            }, NULL);
+
+    std::cout << "---------------------------------" << std::endl;
+    std::cout << windows_.size() << " windows found !" << std::endl;
+    std::cout << "---------------------------------" << std::endl;
+    for (const auto& window : windows_) {
+        displayWindows(window);
+    }
+    return true;
+}
+
+/////////////////////////////////////////////////////
 
 int DisplayManager::MonitorCount()
 {
@@ -109,7 +157,7 @@ int DisplayManager::GetPrevMonitorIndex(HMONITOR monitor)
 
     // The monitor is the fist one
     if (currentIndex <= 0) {
-        return monitorsCount -1;
+        return monitorsCount - 1;
     }
 
     // Regular case
@@ -264,7 +312,7 @@ bool DisplayManager::MoveWindow(HWND window, HMONITOR srcMonitor, HMONITOR destM
 /**
  * Windows CALLBACK to list monitors
  */
-BOOL CALLBACK DisplayManager::MonitorEnumProc(HMONITOR monitor, HDC hdcMonitor, LPRECT lpMonitorRect, LPARAM dwData)
+BOOL DisplayManager::MonitorEnumProc(HMONITOR monitor, HDC, LPRECT lpMonitorRect, LPARAM dwData)
 {
     monitors_.push_back(monitor);
     return TRUE;

@@ -10,6 +10,9 @@ TEST(DisplayManager, CountMonitors)
     const auto monCount = DisplayManager::MonitorCount();
     std::cout << "Monitor count: " << monCount << std::endl;
     ASSERT_TRUE(monCount > 0) << "There should be at least one monitor";
+
+//    ASSERT_TRUE(DisplayManager::GetProcessList());
+    ASSERT_TRUE(DisplayManager::GetWindowList());
 }
 
 int main(int argc, char** argv)

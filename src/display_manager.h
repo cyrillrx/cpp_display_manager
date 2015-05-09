@@ -18,13 +18,15 @@
 #include "model/window.h"
 
 typedef Point<float> Pointf;
-
 /**
  * Screens and windows manager class
  */
 class DisplayManager
 {
 public:
+
+    static bool GetWindowList();
+
     /** @return The active monitor count. */
     static int MonitorCount();
 
@@ -68,6 +70,8 @@ private:
 # if defined(WINDOWS_PLATFORM)
 
 #include <windows.h>
+
+    static std::vector<Window> windows_;
 
     static std::vector<HMONITOR> monitors_;
 

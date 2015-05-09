@@ -4,30 +4,12 @@
 
 #include "../display_manager.h"
 
-#if !defined(WINDOWS_PLATFORM)
+#if defined(UNIX_PLATFORM)
 
-bool SplashLeft(Window win)
+bool DisplayManager::GetWindowList()
 {
     // TODO implement
     return false;
-}
-
-bool SplashRight(Window win)
-{
-    // TODO implement
-    return false;
-}
-
-int PrevScreen(Window win)
-{
-    // TODO implement
-    return 0;
-}
-
-int NextScreen(Window win)
-{
-    // TODO implement
-    return 0;
 }
 
 int DisplayManager::MonitorCount()
@@ -35,4 +17,29 @@ int DisplayManager::MonitorCount()
     // TODO implement
     return 0;
 }
+
+bool DisplayManager::SplashLeft(Window win)
+{
+    // TODO implement
+    return false;
+}
+
+bool DisplayManager::SplashRight(Window win)
+{
+    // TODO implement
+    return false;
+}
+
+int DisplayManager::PrevScreen(Window win)
+{
+    // TODO implement
+    return 0;
+}
+
+int DisplayManager::NextScreen(Window win)
+{
+    // TODO implement
+    return 0;
+}
+
 #endif
