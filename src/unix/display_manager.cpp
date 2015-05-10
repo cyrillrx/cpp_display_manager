@@ -30,13 +30,13 @@ bool DisplayManager::SplashRight(Window win)
     return false;
 }
 
-int DisplayManager::PrevScreen(Window win)
+bool DisplayManager::PrevScreen(Window win)
 {
     // TODO implement
     return 0;
 }
 
-int DisplayManager::NextScreen(Window win)
+bool DisplayManager::NextScreen(Window win)
 {
     // TODO implement
     return 0;

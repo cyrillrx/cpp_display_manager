@@ -7,9 +7,9 @@
 #include "platform_config.h"
 
 # if defined(WINDOWS_PLATFORM)
-
-#   include <windows.h>
-
+#include <windows.h>
+# else
+//#include <X11/Xlib.h>
 # endif
 
 #include <vector>
