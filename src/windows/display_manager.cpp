@@ -7,7 +7,7 @@
 #if defined(WINDOWS_PLATFORM)
 
 #include <iostream>
-#include "displayer.h"
+#include "core/displayer.h"
 
 const auto ERROR_INDEX(-1);
 const auto FIRST_MON_ID(0);

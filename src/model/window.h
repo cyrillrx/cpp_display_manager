@@ -5,7 +5,7 @@
 #pragma once
 
 #include <string>
-#include "rect.h"
+#include "core/rect.h"
 
 /**
  * Represents a window on the screen.

@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "platform_config.h"
+#include "core/platform_config.h"
 
 # if defined(WINDOWS_PLATFORM)
 #include <windows.h>
@@ -13,8 +13,8 @@
 # endif
 
 #include <vector>
-#include "rect.h"
-#include "point.h"
+#include "core/rect.h"
+#include "core/point.h"
 #include "model/window.h"
 
 typedef Point<float> Pointf;
